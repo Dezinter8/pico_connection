@@ -13,7 +13,8 @@ class SerialSubscriber(Node):
             reliability=QoSReliabilityPolicy.BEST_EFFORT
         )
         self.publisher_ = self.create_publisher(Point32, 'imu_data', qos_profile)
-        self.serial_port = serial.Serial('/dev/ttyACM0', 115200, timeout=None)
+        # self.serial_port = serial.Serial('/dev/ttyACM0', 115200, timeout=None)
+        self.serial_port = serial.Serial('/dev/serial/by-id/usb-Raspberry_Pi_Pico_E660D4A0A772982F-if00', 115200, timeout=None)
         self.timer = self.create_timer(0.01, self.read_and_publish)
 
     def read_and_publish(self):
