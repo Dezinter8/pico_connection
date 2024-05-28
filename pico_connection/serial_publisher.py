@@ -17,7 +17,7 @@ class SerialSubscriber(Node):
         self.serial_port = None
         self.serial_device_path = '/dev/serial/by-id/usb-Raspberry_Pi_Pico_E660D4A0A772982F-if00'
         self.open_serial_port()
-        self.timer = self.create_timer(0.05, self.read_and_publish)
+        self.timer = self.create_timer(0.01, self.read_and_publish)
 
     def open_serial_port(self):
         while self.serial_port is None:
