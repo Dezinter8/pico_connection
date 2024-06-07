@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from rclpy.qos import QoSProfile, QoSHistoryPolicy, QoSReliabilityPolicy
+from rclpy.qos import QoSProfile, QoSHistoryPolicy, QoSReliabilityPolicy, QoSDurabilityPolicy
 from geometry_msgs.msg import Point32
 import serial
 import time
@@ -10,8 +10,9 @@ class SerialSubscriber(Node):
         super().__init__('serial_subscriber')
         qos_profile = QoSProfile(
             history=QoSHistoryPolicy.KEEP_LAST,
-            depth=1,
-            reliability=QoSReliabilityPolicy.BEST_EFFORT
+            depth=5,
+            reliability=QoSReliabilityPolicy.BEST_EFFORT,
+            durability=QoSDurabilityPolicy.VOLATILE
         )
         self.publisher_ = self.create_publisher(Point32, 'imu_data', qos_profile)
         self.serial_port = None
